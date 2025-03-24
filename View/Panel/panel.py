@@ -2,10 +2,8 @@ from kivymd.uix.menu import MDDropdownMenu
 
 from kivy.app import App
 
-
 class Panel:
-    def __init__(self, app):
-        self.app = app
+    def __init__(self):
         self.menu: MDDropdownMenu = None
 
     def open_menu(self, menu_button):
@@ -42,13 +40,16 @@ class Panel:
         self.menu.dismiss()
 
     def switch_theme_style(self):
-        theme_cls = self.app.theme_cls
-        theme_cls.primary_palette = (
-            "Darkblue" if theme_cls.primary_palette == "Orange" else "Orange"
+        app = App.get_running_app()
+
+        app.theme_cls.primary_palette = (
+            "Darkblue" if app.theme_cls.primary_palette == "Indigo" else "Indigo"
         )
-        theme_cls.theme_style = (
-            "Dark" if theme_cls.theme_style == "Light" else "Light"
+
+        app.theme_cls.theme_style = (
+            "Dark" if app.theme_cls.theme_style == "Light" else "Light"
         )
+
         self.menu.dismiss()
 
     @staticmethod
