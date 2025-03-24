@@ -1,0 +1,14 @@
+MDScreen:
+    md_bg_color: self.theme_cls.backgroundColor
+
+    MDBoxLayout:
+        id: root_box
+        orientation: "horizontal"
+        spacing: "12dp"
+        padding: "12dp"
+
+        MDIconButton:
+            pos_hint: {"center_x": .5, "center_y": .98}
+            on_release: app.open_menu(self)
+            text: "Menu"
+            icon: "menu"
