@@ -1,7 +1,7 @@
 from kivymd.uix.screen import MDScreen
 from View.Panel.panel import Panel
 
-class MenuScreenView(MDScreen):
+class MenuScreen(MDScreen):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
         self.panel = Panel()

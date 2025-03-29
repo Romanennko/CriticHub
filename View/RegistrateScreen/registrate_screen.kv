@@ -1,0 +1,18 @@
+<RegistrateScreen>:
+    MDScreen:
+        md_bg_color: self.theme_cls.backgroundColor
+
+        MDBoxLayout:
+            orientation: "horizontal"
+            spacing: "12dp"
+            padding: "12dp"
+
+            MDIconButton:
+                text: "Menu"
+                icon: "menu"
+                pos_hint: {"center_x": 0.5, "center_y": 0.98}
+                on_release: root.open_menu(self)
+
+            MDLabel:
+                text: "Registrate Screen"
+                halign: "center"

@@ -1,8 +1,9 @@
 screens = {
-    "registrate": "RegistrateScreen.registrate_screen",
-    "login": "LoginScreen.login_screen",
-    "menu": "MenuScreen.menu_screen",
-    "list": "ListScreen.list_screen",
-    "profile": "ProfileScreen.profile_screen",
-    "create": "CreateElementScreen.create_element_screen",
+    "registrate": ("View.RegistrateScreen.registrate_screen", "RegistrateScreen"),
+    "login": ("View.LoginScreen.login_screen", "LoginScreen"),
+    "menu": ("View.MenuScreen.menu_screen", "MenuScreen"),
+    "list": ("View.ListScreen.list_screen", "ListScreen"),
+    "create": ("View.CreateElementScreen.create_element_screen", "CreateElementScreen"),
+    "profile": ("View.ProfileScreen.profile_screen", "ProfileScreen"),
+
 }

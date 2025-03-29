@@ -12,3 +12,9 @@ MDScreen:
             on_release: app.open_menu(self)
             text: "Menu"
             icon: "menu"
+
+        MDIconButton:
+            pos_hint: {"center_x": .5, "center_y": .98}
+            on_release: app.panel.open_screen_profile()
+            text: "Profile"
+            icon: "account"

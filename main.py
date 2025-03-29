@@ -2,10 +2,9 @@ import ctypes
 from kivy.core.window import Window
 from kivy.core.window import Window as KivyWindow
 from kivy.utils import platform
-
 from kivymd.app import MDApp
 from View.ManagerScreen.manager_screen import ManagerScreen
-
+from View.screens import screens
 
 class CriticHub(MDApp):
     def __init__(self, **kwargs):
@@ -28,8 +27,11 @@ class CriticHub(MDApp):
 
         self.manager_screen = ManagerScreen()
 
-    def build(self) -> ManagerScreen:
-        self.manager_screen.add_widget(self.manager_screen.create_screen("menu"))
+    def build(self):
+        for screen_name, (module_path, class_name) in screens.items():
+            self.manager_screen.load_screen(module_path, class_name, screen_name)
+        self.manager_screen.switch_screen("menu")
+
         return self.manager_screen
 
 

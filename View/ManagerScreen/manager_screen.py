@@ -1,48 +1,42 @@
 import os
-
 from kivy.lang import Builder
-from kivy.uix.screenmanager import ScreenManager
+from kivymd.uix.screenmanager import MDScreenManager
 
-from kivymd.app import MDApp
-
-from View.screens import screens
-
-class ManagerScreen(ScreenManager):
-    _screen_names = []
-
+class ManagerScreen(MDScreenManager):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.app = MDApp.get_running_app()
 
-    def create_screen(self, name_screen):
-        if name_screen not in self._screen_names:
-            self._screen_names.append(name_screen)
-            self.load_common_package(name_screen)
-            exec(f"import View.{screens[name_screen]}")
-            self.app.load_all_kv_files(
-                os.path.join(self.app.directory, "View", screens[name_screen.split(".")[0]])
-            )
-            view = eval(
-                f'View.{screens[name_screen]}.{screens[name_screen].split(".")[0]}View()'
-            )
-            view.name = name_screen
+    def add_screen(self, screen, screen_name):
+        if not self.has_screen(screen_name):
+            self.add_widget(screen)
 
-            return view
+    def switch_screen(self, screen_name):
+        if self.has_screen(screen_name):
+            self.current = screen_name
+        else:
+            print(f"Screen '{screen_name}' not found!")
 
-    def load_common_package(self, name_screen) -> None:
-        def _load_kv(path_to_kv):
-            if not any(path_to_kv in loaded_path_kv for loaded_path_kv in Builder.files):
-                print(f"Loading KV file: {path_to_kv}")
-                Builder.load_file(path_to_kv)
+    def has_screen(self, screen_name):
+        return screen_name in self.screen_names
 
-        kv_paths = {
-            "registrate": os.path.join("View", "RegistrateScreen", "registrate_screen.kv"),
-            "login": os.path.join("View", "LoginScreen", "login_screen.kv"),
-            "menu": os.path.join("View", "MenuScreen", "menu_screen.kv"),
-            "list": os.path.join("View", "ListScreen", "list_screen.kv"),
-            "profile": os.path.join("View", "ProfileScreen", "profile_screen.kv"),
-            "create": os.path.join("View", "CreateElementScreen", "create_element_screen.kv"),
-        }
+    def load_screen(self, module_path, class_name, screen_name):
+        try:
+            module = __import__(module_path, fromlist=[class_name])
+            screen_class = getattr(module, class_name)
 
-        if name_screen in kv_paths:
-            _load_kv(kv_paths[name_screen])
+            kv_path = os.path.join(*module_path.split(".")[:-1], f"{screen_name}_screen.kv")
+            if os.path.exists(kv_path):
+                print(f"Loading KV file: {kv_path}")
+                Builder.load_file(kv_path)
+            else:
+                print(f"KV file not found: {kv_path}")
+
+            screen = screen_class(name=screen_name)
+            self.add_screen(screen, screen_name)
+        except AttributeError as e:
+            print(f"Error: Class {class_name} not found in module {module_path}. Exception: {e}")
+        except FileNotFoundError as e:
+            print(f"Error: {e}")
+        except Exception as e:
+            print(f"Unexpected error loading screen {screen_name}: {e}")
+        print(f"Screens in Manager: {[screen.name for screen in self.screens]}")

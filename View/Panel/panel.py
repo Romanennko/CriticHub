@@ -1,17 +1,18 @@
 from kivymd.uix.menu import MDDropdownMenu
-
-from kivy.app import App
+from kivymd.app import MDApp
 
 class Panel:
-    def __init__(self):
+    def __init__(self, manager_screen=None):
         self.menu: MDDropdownMenu = None
+        self.manager_screen = manager_screen or MDApp.get_running_app().manager_screen
 
     def open_menu(self, menu_button):
         menu_items = []
         for item, method in {
-            "Profile": lambda: self.open_screen_profile(),
-            "View lists": lambda: self.open_screen_lists(),
-            "Create new element": lambda: self.create_element(),
+            "Menu": lambda : self.open_screen("menu"),
+            "Profile": lambda: self.open_screen("profile"),
+            "View lists": lambda: self.open_screen("list"),
+            "Create new element": lambda: self.open_screen("create"),
             "Switch theme style": lambda: self.switch_theme_style(),
             "Exit the program": lambda: self.exit_program(),
         }.items():
@@ -27,20 +28,15 @@ class Panel:
         )
         self.menu.open()
 
-    def open_screen_profile(self):
-        print("Profile screen opened")
-        self.menu.dismiss()
-
-    def open_screen_lists(self):
-        print("Lists screen opened")
-        self.menu.dismiss()
-
-    def create_element(self):
-        print("New element creation started")
+    def open_screen(self, screen_name):
+        if self.manager_screen:
+            self.manager_screen.switch_screen(screen_name)
+        else:
+            print("ManagerScreen is not set!")
         self.menu.dismiss()
 
     def switch_theme_style(self):
-        app = App.get_running_app()
+        app = MDApp.get_running_app()
 
         app.theme_cls.primary_palette = (
             "Darkblue" if app.theme_cls.primary_palette == "Indigo" else "Indigo"
@@ -54,4 +50,4 @@ class Panel:
 
     @staticmethod
     def exit_program():
-        App.get_running_app().stop()
+        MDApp.get_running_app().stop()
