@@ -8,6 +8,7 @@ class CriticHub(MDApp):
         super().__init__(**kwargs)
 
         Window.fullscreen = "auto"
+        self.icon = "assets/images/logo.png"
 
         self.theme_cls.theme_style_switch_animation = True
         self.theme_cls.theme_style_switch_animation_duration = 0.8
