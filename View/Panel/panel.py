@@ -1,10 +1,12 @@
 from kivymd.uix.menu import MDDropdownMenu
 from kivymd.app import MDApp
+from View.LoginScreen.login_screen import LoginScreen
 
 class Panel:
     def __init__(self, manager_screen=None):
         self.menu: MDDropdownMenu = None
         self.manager_screen = manager_screen or MDApp.get_running_app().manager_screen
+        self.login_screen = LoginScreen(manager_screen=self.manager_screen)
 
     def open_menu(self, menu_button):
         menu_items = []
@@ -14,6 +16,7 @@ class Panel:
             "View lists": lambda: self.open_screen("list"),
             "Create new element": lambda: self.open_screen("create"),
             "Switch theme style": lambda: self.switch_theme_style(),
+            "Log out of your account": lambda: self.login_screen.logout(),
             "Exit the program": lambda: self.exit_program(),
         }.items():
             menu_items.append(
