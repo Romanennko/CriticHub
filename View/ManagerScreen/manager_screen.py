@@ -26,7 +26,6 @@ class ManagerScreen(MDScreenManager):
 
             kv_path = os.path.join(*module_path.split(".")[:-1], f"{screen_name}_screen.kv")
             if os.path.exists(kv_path):
-                print(f"Loading KV file: {kv_path}")
                 Builder.load_file(kv_path)
             else:
                 print(f"KV file not found: {kv_path}")
