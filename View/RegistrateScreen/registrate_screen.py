@@ -1,10 +1,30 @@
 from kivymd.uix.screen import MDScreen
-from View.Panel.panel import Panel
+from View.ManagerScreen.manager_screen import ManagerScreen
+from kivymd.app import MDApp
+from database import create_user
+from kivymd.toast import toast
 
 class RegistrateScreen(MDScreen):
-    def __init__(self, **kwargs):
+    def __init__(self, manager_screen=None, **kwargs):
         super().__init__(**kwargs)
-        self.panel = Panel()
+        self.manager_screen = ManagerScreen()
+        self.manager_screen = manager_screen or MDApp.get_running_app().manager_screen
 
-    def open_menu(self, menu_button):
-        self.panel.open_menu(menu_button)
+    def registrate_success(self):
+        username = self.ids.username.text.strip()
+        password = self.ids.password.text.strip()
+
+        if not username or not password:
+            toast("Please fill in all the fields!")
+            return
+
+        success = create_user(username, password)
+
+        if success:
+            toast("Registration successful!")
+            self.manager_screen.switch_screen("login")
+        else:
+            toast("Error: Username already exists")
+
+    def open_login_screen(self):
+        self.manager_screen.switch_screen("login")

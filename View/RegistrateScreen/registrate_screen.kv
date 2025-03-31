@@ -1,18 +1,62 @@
+#: import dp kivy.metrics.dp
+
 <RegistrateScreen>:
     MDScreen:
         md_bg_color: self.theme_cls.bg_normal
 
-        MDBoxLayout:
-            orientation: "horizontal"
-            spacing: "12dp"
-            padding: "12dp"
-
-            MDIconButton:
-                text: "Menu"
-                icon: "menu"
-                pos_hint: {"center_x": 0.5, "center_y": 0.98}
-                on_release: root.open_menu(self)
+        MDCard:
+            size_hint: None, None
+            size: dp(400), dp(500)
+            pos_hint: {"center_x": 0.5, "center_y": 0.5}
+            elevation: 10
+            padding: dp(25)
+            spacing: dp(25)
+            orientation: 'vertical'
+            md_bg_color: self.theme_cls.bg_normal
 
             MDLabel:
-                text: "Registrate Screen"
-                halign: "center"
+                text: "Welcome to CriticHub!"
+                font_size: dp(24)
+                halign: 'center'
+                theme_text_color: "Primary"
+
+            MDTextField:
+                id: username
+                hint_text: "Username"
+                icon_right: "account"
+                size_hint_x: None
+                size_hint_y: None
+                width: dp(280)
+                height: dp(48)
+                pos_hint: {"center_x": 0.5}
+                mode: "rectangle"
+                theme_text_color: "Hint"
+
+            MDTextField:
+                id: password
+                hint_text: "Password"
+                icon_right: "eye-off"
+                size_hint_x: None
+                size_hint_y: None
+                width: dp(280)
+                height: dp(48)
+                pos_hint: {"center_x": 0.5}
+                password: True
+                mode: "rectangle"
+                theme_text_color: "Hint"
+
+            MDRaisedButton:
+                text: "REGISTRATE"
+                font_size: dp(14)
+                size_hint_x: None
+                width: dp(120)
+                pos_hint: {"center_x": 0.5}
+                on_release: root.registrate_success()
+
+            MDRaisedButton:
+                text: "Log in"
+                font_size: dp(14)
+                size_hint_x: None
+                width: dp(120)
+                pos_hint: {"center_x": 0.5}
+                on_release: root.open_login_screen()

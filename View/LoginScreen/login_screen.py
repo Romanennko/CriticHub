@@ -17,3 +17,6 @@ class LoginScreen(MDScreen):
     def login_success(self):
         self._user_logged_in = True
         self.manager_screen.switch_screen("menu")
+
+    def open_registrate_screen(self):
+        self.manager_screen.switch_screen("registrate")

@@ -15,13 +15,13 @@
             md_bg_color: self.theme_cls.bg_normal
 
             MDLabel:
-                text: "WELCOME"
+                text: "Welcome back!"
                 font_size: dp(24)
                 halign: 'center'
                 theme_text_color: "Primary"
 
             MDTextField:
-                id: user
+                id: username
                 hint_text: "Username"
                 icon_right: "account"
                 size_hint_x: None
@@ -54,9 +54,9 @@
                 on_release: root.login_success()
 
             MDRaisedButton:
-                text: "CLEAR"
+                text: "Registrate"
                 font_size: dp(14)
                 size_hint_x: None
                 width: dp(120)
                 pos_hint: {"center_x": 0.5}
-                on_release: app.clear()
+                on_release: root.open_registrate_screen()
