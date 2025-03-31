@@ -17,13 +17,13 @@ class CriticHub(MDApp):
         self.theme_cls.primary_palette = "BlueGray"
 
         self.manager_screen = ManagerScreen()
-        self.login_screen = LoginScreen()
+        self.login_screen = LoginScreen(manager_screen=self.manager_screen)
 
     def build(self):
         for screen_name, (module_path, class_name) in screens.items():
             self.manager_screen.load_screen(module_path, class_name, screen_name)
 
-        initial_screen = "login" if not self.login_screen.user_logged_in else "menu"
+        initial_screen = "login" if not self.login_screen.is_logged_in() else "menu"
         self.manager_screen.switch_screen(initial_screen)
 
         return self.manager_screen
