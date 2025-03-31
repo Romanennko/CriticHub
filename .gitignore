@@ -58,6 +58,7 @@ env
 .python-version
 
 # Temp / Cache
+user_session.json
 cache
 .cache
 temp
