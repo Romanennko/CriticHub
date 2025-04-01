@@ -1,10 +1,12 @@
-from kivymd.uix.screen import MDScreen
-from View.ManagerScreen.manager_screen import ManagerScreen
-from kivymd.app import MDApp
-from kivymd.toast import toast
-from database import check_credentials, check_user_exists
 import json
 import os
+
+from kivymd.app import MDApp
+from kivymd.toast import toast
+from kivymd.uix.screen import MDScreen
+
+from database import check_credentials, check_user_exists
+from View.ManagerScreen.manager_screen import ManagerScreen
 
 SESSION_FILE = "user_session.json"
 

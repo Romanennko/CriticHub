@@ -1,5 +1,6 @@
-from kivymd.uix.menu import MDDropdownMenu
 from kivymd.app import MDApp
+from kivymd.uix.menu import MDDropdownMenu
+
 from View.LoginScreen.login_screen import LoginScreen
 
 class Panel:
@@ -42,7 +43,7 @@ class Panel:
         app = MDApp.get_running_app()
 
         app.theme_cls.primary_palette = (
-            "Darkblue" if app.theme_cls.primary_palette == "Indigo" else "Indigo"
+            "BlueGray" if app.theme_cls.primary_palette == "Indigo" else "Indigo"
         )
 
         app.theme_cls.theme_style = (

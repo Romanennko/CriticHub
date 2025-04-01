@@ -1,8 +1,9 @@
-from kivymd.uix.screen import MDScreen
-from View.ManagerScreen.manager_screen import ManagerScreen
 from kivymd.app import MDApp
-from database import create_user
 from kivymd.toast import toast
+from kivymd.uix.screen import MDScreen
+
+from database import create_user
+from View.ManagerScreen.manager_screen import ManagerScreen
 
 class RegistrateScreen(MDScreen):
     def __init__(self, manager_screen=None, **kwargs):

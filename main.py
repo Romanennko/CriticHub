@@ -1,8 +1,10 @@
 from kivy.core.window import Window
+
 from kivymd.app import MDApp
+
+from View.LoginScreen.login_screen import LoginScreen
 from View.ManagerScreen.manager_screen import ManagerScreen
 from View.screens import screens
-from View.LoginScreen.login_screen import LoginScreen
 
 class CriticHub(MDApp):
     def __init__(self, **kwargs):
