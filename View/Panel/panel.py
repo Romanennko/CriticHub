@@ -15,7 +15,7 @@ class Panel:
             "Menu": lambda : self.open_screen("menu"),
             "Profile": lambda: self.open_screen("profile"),
             "View lists": lambda: self.open_screen("list"),
-            "Create new element": lambda: self.open_screen("create"),
+            "Create new element": lambda: self.open_screen("create_element"),
             "Switch theme style": lambda: self.switch_theme_style(),
             "Log out of your account": lambda: self.login_screen.logout(),
             "Exit the program": lambda: self.exit_program(),
